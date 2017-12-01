@@ -71,8 +71,7 @@ public class WebServletContextConfiguration extends WebMvcConfigurerAdapter
     {
         configurer.favorPathExtension(true).favorParameter(false)
                 .parameterName("mediaType").ignoreAcceptHeader(false)
-                .useJaf(false).defaultContentType(MediaType.APPLICATION_XML)
-                .mediaType("xml", MediaType.APPLICATION_XML)
+                .useJaf(false).defaultContentType(MediaType.APPLICATION_JSON)
                 .mediaType("json", MediaType.APPLICATION_JSON);
     }
 

@@ -8,6 +8,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
+
 
 @RestEndpointAdvice
 public class RestExceptionHandler
@@ -33,6 +38,7 @@ public class RestExceptionHandler
         private String code;
         private String message;
 
+        @XmlAttribute
         public String getCode()
         {
             return code;
@@ -43,6 +49,7 @@ public class RestExceptionHandler
             this.code = code;
         }
 
+        @XmlValue
         public String getMessage()
         {
             return message;
@@ -55,10 +62,12 @@ public class RestExceptionHandler
     }
 
     @SuppressWarnings("unused")
+    @XmlRootElement(name = "errors")
     public static class ErrorResponse
     {
         private List<ErrorItem> errors = new ArrayList<>();
 
+        @XmlElement(name = "error")
         public List<ErrorItem> getErrors()
         {
             return errors;

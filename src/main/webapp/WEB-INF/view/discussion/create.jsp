@@ -18,7 +18,7 @@
             <form:input path="user" type="email" /><br />
             <br />
             <form:label path="subject">Subject</form:label><br />
-            <form:input path="subject" /><br />
+            <form:input path="subject"/><br />
             <br />
             <form:label path="message">Message</form:label><br />
             <form:textarea path="message" cols="40" rows="5" /><br />

@@ -1,5 +1,8 @@
 package edu.usm.cos375.springboot.form;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "discussion")
 public class DiscussionForm
 {
     private String user;
