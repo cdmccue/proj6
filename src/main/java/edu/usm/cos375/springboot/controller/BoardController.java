@@ -2,23 +2,15 @@ package edu.usm.cos375.springboot.controller;
 
 import edu.usm.cos375.springboot.entity.Discussion;
 import edu.usm.cos375.springboot.form.DiscussionForm;
-import org.springframework.stereotype.Controller;
+import edu.usm.cos375.springboot.annotation.WebController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
-
 import javax.inject.Inject;
-
-//import java.util.Hashtable;
 import java.util.Map;
 
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//import com.fasterxml.jackson.core.type.TypeReference;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.databind.SerializationFeature;
-
-@Controller
+@WebController
 @RequestMapping("discussion")
 public class BoardController
 {
@@ -27,12 +19,6 @@ public class BoardController
     @RequestMapping(value = {"", "list"}, method = RequestMethod.GET)
     public String listDiscussions(Map<String, Object> model) //throws JsonProcessingException
     {   
-    	
-//    	    ObjectMapper mapper = new ObjectMapper();
-//    	    mapper.enable(SerializationFeature.INDENT_OUTPUT);
-//    	    String ListToJson = mapper.writeValueAsString(this.discussionService.getAllDiscussions());
-//    	    
-//        model.put("discussions", ListToJson);
     	    model.put("discussions", this.discussionService.getAllDiscussions());
         return "discussion/list";
     }

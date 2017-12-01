@@ -50,4 +50,10 @@ public class DefaultDiscussionService implements DiscussionService
         else
             this.discussionRepository.update(discussion);
     }
+    
+    @Override
+    public void deleteDiscussion(long id)
+    {
+        this.discussionRepository.delete(id);
+    }
 }

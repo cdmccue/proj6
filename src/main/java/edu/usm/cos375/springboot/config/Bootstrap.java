@@ -23,16 +23,28 @@ public class Bootstrap implements WebApplicationInitializer
         rootContext.register(RootContextConfiguration.class);
         container.addListener(new ContextLoaderListener(rootContext));
 
-        AnnotationConfigWebApplicationContext servletContext =
+        AnnotationConfigWebApplicationContext webContext =
                 new AnnotationConfigWebApplicationContext();
-        servletContext.register(ServletContextConfiguration.class);
+        webContext.register(WebServletContextConfiguration.class);
         ServletRegistration.Dynamic dispatcher = container.addServlet(
-                "springDispatcher", new DispatcherServlet(servletContext)
+                "springWebDispatcher", new DispatcherServlet(webContext)
         );
         dispatcher.setLoadOnStartup(1);
         dispatcher.setMultipartConfig(new MultipartConfigElement(
                 null, 20_971_520L, 41_943_040L, 512_000
         ));
         dispatcher.addMapping("/");
+
+        AnnotationConfigWebApplicationContext restContext =
+                new AnnotationConfigWebApplicationContext();
+        restContext.register(RestServletContextConfiguration.class);
+        DispatcherServlet servlet = new DispatcherServlet(restContext);
+        servlet.setDispatchOptionsRequest(true);
+        dispatcher = container.addServlet(
+                "springRestDispatcher", servlet
+        );
+        dispatcher.setLoadOnStartup(2);
+        dispatcher.addMapping("/services/Rest/*");
     }
 }
+

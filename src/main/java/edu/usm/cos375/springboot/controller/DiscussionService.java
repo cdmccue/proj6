@@ -9,4 +9,5 @@ public interface DiscussionService
     List<Discussion> getAllDiscussions();
     Discussion getDiscussion(long id);
     void saveDiscussion(Discussion discussion);
+    void deleteDiscussion(long id);
 }

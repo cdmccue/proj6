@@ -3,7 +3,7 @@ package edu.usm.cos375.springboot.controller;
 import edu.usm.cos375.springboot.entity.Discussion;
 import edu.usm.cos375.springboot.entity.Post;
 import edu.usm.cos375.springboot.form.PostForm;
-import org.springframework.stereotype.Controller;
+import edu.usm.cos375.springboot.annotation.WebController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +13,7 @@ import edu.usm.cos375.springboot.controller.PostService;
 import javax.inject.Inject;
 import java.util.Map;
 
-@Controller
+@WebController
 @RequestMapping("discussion/{discussionId:\\d+}")
 public class DiscussionController
 {

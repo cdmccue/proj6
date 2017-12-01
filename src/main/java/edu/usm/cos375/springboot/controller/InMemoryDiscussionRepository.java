@@ -15,14 +15,6 @@ public class InMemoryDiscussionRepository implements DiscussionRepository
     private final Map<Long, Discussion> database = new Hashtable<>();
     private volatile long discussionIdSequence = 1L;
     @Inject PostRepository postRepository;
-
-//    public InMemoryDiscussionRepository()
-//    {
-//    	    this.database.put(1L, new Discussion(1L, "Scarborough", "Main Street", "Chris123",
-//    	    		"First Discussion", "Can someone tell that beagle to shut up!"));
-//    	    this.database.put(2L, new Discussion(2L, "Portland", "Spring Street", "DogMom55",
-//    	    		"Please Refrain", "Please refrain from letting your dark bark all night!"));
-//    }
     
     @Override
     public List<Discussion> getAll()

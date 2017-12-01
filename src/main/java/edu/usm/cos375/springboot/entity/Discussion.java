@@ -18,16 +18,6 @@ public class Discussion
     private String uriSafeSubject;
     private Instant lastUpdated;
     private Set<String> subscribedUsers = new HashSet<>();
-
-//    public Discussion(long id, String town, String street, String user, String subject, String message)
-//    {
-//    	   this.id = id;
-//    	   this.town = town;
-//    	   this.street = street;
-//    	   this.user = user;
-//    	   this.subject = subject;
-//    	   this.message = message;
-//    }
     
     public long getId()
     {
