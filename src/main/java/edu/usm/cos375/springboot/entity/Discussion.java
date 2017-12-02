@@ -4,17 +4,19 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import edu.usm.cos375.springboot.validation.NotBlank;
 
-@XmlRootElement
 public class Discussion
 {
     private long id;
     private String town;
     private String street;
     
+    @NotBlank(message = "{validate.discussion.user}")
     private String user;
+    @NotBlank(message = "{validate.discussion.subject}")
     private String subject;
+    @NotBlank(message = "{validate.discussion.message}")
     private String message;
     private Instant created;
     
