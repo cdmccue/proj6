@@ -35,6 +35,8 @@ public class BoardController
     {
         Discussion discussion = new Discussion();
         
+        discussion.setStreet(form.getStreet());
+        discussion.setTown(form.getTown());
         discussion.setUser(form.getUser());
         discussion.setSubject(form.getSubject());
         discussion.setMessage(form.getMessage());

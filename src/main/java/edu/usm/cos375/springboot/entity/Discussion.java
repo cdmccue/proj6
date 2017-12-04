@@ -4,10 +4,30 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
+
 import edu.usm.cos375.springboot.validation.NotBlank;
 
-public class Discussion
+
+@Entity
+@Table(name = "Discussions", indexes = {
+		@Index(name = "twn", columnList = "Town")
+})
+public class Discussion implements Serializable
 {
+	@Column(name = "DiscussionId")
     private long id;
     private String town;
     private String street;
@@ -18,12 +38,15 @@ public class Discussion
     private String subject;
     @NotBlank(message = "{validate.discussion.message}")
     private String message;
-    private Instant created;
+    private Date created;
     
     private String uriSafeSubject;
-    private Instant lastUpdated;
+    private Date lastUpdated;
     private Set<String> subscribedUsers = new HashSet<>();
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DiscussionId")
     public long getId()
     {
         return id;
@@ -34,6 +57,8 @@ public class Discussion
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "UserName")
     public String getUser()
     {
         return user;
@@ -44,6 +69,8 @@ public class Discussion
         this.user = user;
     }
     
+    @Basic
+    @Column(name = "Town")
     public String getTown()
     {
         return town;
@@ -54,6 +81,8 @@ public class Discussion
         this.town = town;
     }
     
+    @Basic
+    @Column(name = "Street")
     public String getStreet()
     {
         return street;
@@ -64,6 +93,8 @@ public class Discussion
         this.street = street;
     }
 
+    @Basic
+    @Column(name = "Subj")
     public String getSubject()
     {
         return subject;
@@ -74,7 +105,7 @@ public class Discussion
         this.subject = subject;
     }
     
-
+    @Basic
     public String getMessage()
     {
         return message;
@@ -85,36 +116,40 @@ public class Discussion
         this.message = message;
     }
 
-    public Instant getCreated()
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getCreated()
     {
         return created;
     }
 
-    public void setCreated(Instant created)
+    public void setCreated(Date created)
     {
         this.created = created;
     }
     
-    public Instant getLastUpdated()
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getLastUpdated()
     {
         return lastUpdated;
     }
 
-    public void setLastUpdated(Instant lastUpdated)
+    public void setLastUpdated(Date lastUpdated)
     {
         this.lastUpdated = lastUpdated;
     }
 
-    public Set<String> getSubscribedUsers()
-    {
-        return subscribedUsers;
-    }
-
-    public void setSubscribedUsers(Set<String> subscribedUsers)
-    {
-        this.subscribedUsers = subscribedUsers;
-    }
+//    @ElementCollection
+//    public Set<String> getSubscribedUsers()
+//    {
+//        return subscribedUsers;
+//    }
+//
+//    public void setSubscribedUsers(Set<String> subscribedUsers)
+//    {
+//        this.subscribedUsers = subscribedUsers;
+//    }
     
+    @Basic
     public String getUriSafeSubject()
     {
         return uriSafeSubject;

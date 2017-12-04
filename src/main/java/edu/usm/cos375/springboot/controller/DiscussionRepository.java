@@ -1,14 +1,14 @@
 package edu.usm.cos375.springboot.controller;
 
 import edu.usm.cos375.springboot.entity.Discussion;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
 
-public interface DiscussionRepository
-{
-    List<Discussion> getAll();
-    Discussion get(long id);
-    void add(Discussion discussion);
-    void update(Discussion discussion);
-    void delete(long id);
+//public interface DiscussionRepository extends GenericRepository<Long, Discussion>
+//{
+//	
+//}
+
+public interface DiscussionRepository extends CrudRepository<Discussion, Long> {
+	
 }

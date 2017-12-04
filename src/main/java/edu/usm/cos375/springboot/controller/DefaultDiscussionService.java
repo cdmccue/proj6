@@ -1,29 +1,41 @@
 package edu.usm.cos375.springboot.controller;
 
+import org.springframework.transaction.annotation.Transactional;
 import edu.usm.cos375.springboot.entity.Discussion;
 import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.text.Normalizer;
 import java.time.Instant;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class DefaultDiscussionService implements DiscussionService
 {
+
     @Inject DiscussionRepository discussionRepository;
+    
+    private <E> List<E> toList(Iterable<E> i)
+    {
+        List<E> list = new ArrayList<>();
+        i.forEach(list::add);
+        return list;
+    }
 
     @Override
+    @Transactional
     public List<Discussion> getAllDiscussions()
     {
-        List<Discussion> list = this.discussionRepository.getAll();
-        list.sort((d1, d2) -> d1.getLastUpdated().compareTo(d2.getLastUpdated()));
-        return list;
+//    	      return this.toList(this.discussionRepository.getAll());
+    	  return this.toList(this.discussionRepository.findAll());
     }
 
     @Override
     public Discussion getDiscussion(long id)
     {
-        return this.discussionRepository.get(id);
+//        return this.discussionRepository.get(id);
+    	return this.discussionRepository.findOne(id);
     }
 
     @Override
@@ -38,22 +50,28 @@ public class DefaultDiscussionService implements DiscussionService
                 .replaceAll("^[^a-z0-9]+", "");
         discussion.setUriSafeSubject(subject);
 
-        Instant now = Instant.now();
-        discussion.setLastUpdated(now);
+        Instant inst = Instant.now();
+        Date now = Date.from(inst);
+//        discussion.setLastUpdated(now);
+//        discussion.setCreated(now);
+        
+        //changed add to save
+        this.discussionRepository.save(discussion);
 
-        if(discussion.getId() < 1)
-        {
-            discussion.setCreated(now);
-            discussion.getSubscribedUsers().add(discussion.getUser());
-            this.discussionRepository.add(discussion);
-        }
-        else
-            this.discussionRepository.update(discussion);
+//        if(discussion.getId() < 1)
+//        {
+//            discussion.setCreated(now);
+////            discussion.getSubscribedUsers().add(discussion.getUser());
+//            this.discussionRepository.add(discussion);
+//        }
+//        else
+//            this.discussionRepository.update(discussion);
     }
     
     @Override
     public void deleteDiscussion(long id)
     {
-        this.discussionRepository.delete(id);
+//        this.discussionRepository.deleteById(id);
+    	  this.discussionRepository.delete(id);
     }
 }

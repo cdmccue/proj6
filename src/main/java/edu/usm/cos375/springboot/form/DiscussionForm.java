@@ -1,13 +1,33 @@
 package edu.usm.cos375.springboot.form;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 public class DiscussionForm
 {
+	private String town;
+	private String street;
     private String user;
     private String subject;
     private String message;
 
+    public String getTown()
+    {
+        return town;
+    }
+
+    public void setTown(String town)
+    {
+        this.town = town;
+    }
+    
+    public String getStreet()
+    {
+        return street;
+    }
+
+    public void setStreet(String street)
+    {
+        this.street = street;
+    }
+    
     public String getUser()
     {
         return user;

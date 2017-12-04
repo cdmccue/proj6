@@ -14,6 +14,12 @@
         [<a href="<c:url value="/discussion/list" />">return to list</a>]<br />
         <br />
         <form:form method="post" modelAttribute="discussionForm">
+            <form:label path="town">Town:</form:label><br />
+            <form:input path="town"/><br />
+            <br />
+            <form:label path="street">Street:</form:label><br />
+            <form:input path="street" /><br />
+            <br />
             <form:label path="user">Your Email</form:label><br />
             <form:input path="user" type="email" /><br />
             <br />
